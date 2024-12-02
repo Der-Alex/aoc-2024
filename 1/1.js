@@ -4,18 +4,18 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const file = await fs.open(path.resolve(__dirname, "1.txt"));
 let l1 = [];
 let l2 = [];
-
 let sum = 0;
 
 for await (const line of file.readLines()) {
-  const splitter = line.split(/\s/);
+  const splitter = line.split(/\s+/);
+  console.log(splitter);
   l1.push(parseInt(splitter[0]));
   l2.push(parseInt(splitter[splitter.length - 1]));
 }
+
 l1 = l1.sort();
 l2 = l2.sort();
 
@@ -37,5 +37,6 @@ const secondAnswer = async () => {
   }
   return sum;
 };
+
 console.log(await firstAnswer());
 console.log(await secondAnswer());
